@@ -4,6 +4,8 @@ cache: false
 env:
 - URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
 before_install:
+- openssl aes-256-cbc -K $encrypted_6be36abe228c_key -iv $encrypted_6be36abe228c_iv
+  -in assets/server.key.enc -out assets/server.key -d
 - export SFDX_AUTOUPDATE_DISABLE=false
 - export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
 - export SFDX_DOMAIN_RETRY=300
@@ -16,7 +18,9 @@ before_install:
 - sfdx --version
 - sfdx plugins --core
 - echo $CONSUMERKEY
-- sfdx force:auth:jwt:grant --clientid 3MVG9A2kN3Bn17hvQW7uA3NCywB3RTGSSQ3XLOffaIG2NG0aQ3cM8YrtbWcFBweUPTtLeqz4iwPKPzxTJkmrh --jwtkeyfile assets/server.key --username rick.matusiewicz@ibotta.com --setdefaultdevhubusername -a ProdDevHub 
+- sfdx force:auth:jwt:grant --clientid 3MVG9A2kN3Bn17hvQW7uA3NCywB3RTGSSQ3XLOffaIG2NG0aQ3cM8YrtbWcFBweUPTtLeqz4iwPKPzxTJkmrh
+  --jwtkeyfile assets/server.key --username rick.matusiewicz@ibotta.com --setdefaultdevhubusername
+  -a ProdDevHub
 script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg --wait
   2
