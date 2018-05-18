@@ -18,7 +18,7 @@ before_install:
 before_script:
 - sfdx force:auth:jwt:grant --clientid 3MVG9A2kN3Bn17hvQW7uA3NCywB3RTGSSQ3XLOffaIG2NG0aQ3cM8YrtbWcFBweUPTtLeqz4iwPKPzxTJkmrh --jwtkeyfile assets/server.key -u rick.matusiewicz@ibotta.com --setdefaultdevhubusername -a ProDevHub --json
 script:
-- sfdx force:org:create -v ProdHubOrg -s -f config/project-scratch-def.json -a ciorg --wait 2 --json
+- sfdx force:org:create -v ProdDevHub -s -f config/project-scratch-def.json -a ciorg --wait 2 --json
 - sfdx force:org:display -u ciorg
 - sfdx force:source:push -u ciorg
 - sfdx force:apex:test:run -u ciorg --wait 10
