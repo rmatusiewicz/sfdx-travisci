@@ -16,7 +16,7 @@ before_install:
 - sfdx --version
 - sfdx plugins --core
 before_script:
-- sfdx force:auth:jwt:grant --clientid CLIENT_ID --jwtkeyfile assets/testFile.txt -u USERNAME --setdefaultdevhubusername -a ProdDevHub
+- sfdx force:auth:jwt:grant --clientid CLIENT_ID --jwtkeyfile assets/server.key -u USERNAME --setdefaultdevhubusername -a ProdDevHub
 script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg --wait
   2
